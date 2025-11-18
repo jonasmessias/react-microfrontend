@@ -1,7 +1,12 @@
 {
-  "name": "mfe-products",
+  "name": "@microshop/mfe-products",
   "version": "1.0.0",
   "description": "Products Microfrontend - Catalog",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jonasmessias/microfrontend.git",
+    "directory": "packages/mfe-products"
+  },
   "scripts": {
     "dev": "webpack serve --mode development",
     "build": "webpack --mode production",
