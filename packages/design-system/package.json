@@ -1,0 +1,26 @@
+{
+  "name": "@microshop/design-system",
+  "version": "1.0.0",
+  "description": "MicroShop Design System - Shared tokens and Tailwind config",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"No tests for design-system package\" && exit 0"
+  },
+  "files": [
+    "tokens.js",
+    "tailwind.config.js",
+    "presets",
+    "CHANGELOG.md"
+  ],
+  "keywords": [
+    "design-system",
+    "tailwind",
+    "tokens",
+    "microfrontend"
+  ],
+  "author": "Jonas",
+  "license": "MIT",
+  "peerDependencies": {
+    "tailwindcss": "^3.4.0"
+  }
+}
