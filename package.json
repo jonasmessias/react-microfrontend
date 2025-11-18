@@ -8,21 +8,29 @@
   ],
   "scripts": {
     "install:all": "npm install",
-    "dev": "npm-run-all --parallel dev:*",
-    "dev:shell": "npm run dev --workspace=shell",
-    "dev:products": "npm run dev --workspace=mfe-products",
-    "dev:cart": "npm run dev --workspace=mfe-cart",
-    "build": "npm-run-all build:*",
-    "build:shell": "npm run build --workspace=shell",
-    "build:products": "npm run build --workspace=mfe-products",
-    "build:cart": "npm run build --workspace=mfe-cart",
-    "test": "npm run test --workspaces",
-    "lint": "npm run lint --workspaces",
-    "format": "prettier --write \"packages/**/*.{ts,tsx,json,css,md}\""
+    "dev": "turbo run dev",
+    "dev:shell": "turbo run dev --filter=@microshop/shell",
+    "dev:products": "turbo run dev --filter=@microshop/mfe-products",
+    "dev:cart": "turbo run dev --filter=@microshop/mfe-cart",
+    "build": "turbo run build",
+    "build:shell": "turbo run build --filter=@microshop/shell",
+    "build:products": "turbo run build --filter=@microshop/mfe-products",
+    "build:cart": "turbo run build --filter=@microshop/mfe-cart",
+    "test": "turbo run test",
+    "lint": "turbo run lint",
+    "clean": "turbo run clean",
+    "format": "prettier --write \"packages/**/*.{ts,tsx,json,css,md}\"",
+    "version:shell": "npm version patch -w @microshop/shell --no-git-tag-version",
+    "version:products": "npm version patch -w @microshop/mfe-products --no-git-tag-version",
+    "version:cart": "npm version patch -w @microshop/mfe-cart --no-git-tag-version",
+    "release:shell": "npm run version:shell && git add packages/shell/package.json && git commit -m 'chore(shell): bump version' && git push",
+    "release:products": "npm run version:products && git add packages/mfe-products/package.json && git commit -m 'chore(products): bump version' && git push",
+    "release:cart": "npm run version:cart && git add packages/mfe-cart/package.json && git commit -m 'chore(cart): bump version' && git push"
   },
   "devDependencies": {
     "npm-run-all": "^4.1.5",
-    "prettier": "^3.1.0"
+    "prettier": "^3.1.0",
+    "turbo": "^2.6.1"
   },
   "engines": {
     "node": ">=16.0.0",

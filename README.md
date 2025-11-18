@@ -1,6 +1,10 @@
 # 🛍️ MicroShop - Microfrontend E-commerce
 
+![CI](https://github.com/jonasmessias/microfrontend/actions/workflows/ci.yml/badge.svg)
+
 A modern e-commerce platform built with **Microfrontend Architecture** using Webpack Module Federation, demonstrating scalable and independent deployment strategies.
+
+> 🎯 **Portfolio Project** - Showcasing advanced frontend architecture patterns for large-scale React applications.
 
 ## 🎯 Purpose
 
@@ -8,7 +12,7 @@ This project showcases advanced frontend architecture patterns for building larg
 
 ## 🏗️ Architecture
 
-**Monorepo Structure** with independent microfrontends:
+**Monorepo Structure** with independent microfrontends powered by **Turborepo**:
 
 ```
 packages/
@@ -33,6 +37,7 @@ packages/
 - **TypeScript 5.2** - Type safety and better DX
 - **Webpack 5** - Module Federation for runtime integration
 - **npm Workspaces** - Monorepo package management
+- **Turborepo** - High-performance build system for monorepos
 
 ### State Management
 
@@ -97,7 +102,7 @@ npm install
 ### Development
 
 ```bash
-# Run all microfrontends concurrently
+# Run all microfrontends concurrently (powered by Turborepo)
 npm run dev
 
 # Or run individually
@@ -127,13 +132,16 @@ npm run test:coverage --workspace=shell
 ### Production Build
 
 ```bash
-# Build all packages
+# Build all packages (with Turborepo caching)
 npm run build
 
 # Build individually
 npm run build:shell
 npm run build:products
 npm run build:cart
+
+# Clean build artifacts
+npm run clean
 ```
 
 ## 📦 Package Structure
@@ -206,6 +214,23 @@ EventBus.emit('cart:add-item', { product, quantity });
 // Cart listens and updates state
 EventBus.on('cart:add-item', (data) => addItem(data));
 ```
+
+## ⚡ Turborepo
+
+This monorepo uses **Turborepo** for intelligent build orchestration:
+
+- **Intelligent caching**: Builds are cached and never re-executed unnecessarily
+- **Task orchestration**: Runs tasks across packages in optimal order  
+- **Parallel execution**: Executes independent tasks simultaneously
+- **Dependency awareness**: Understands package relationships automatically
+
+**Key benefits:**
+- ⚡ **10x faster builds** with intelligent caching
+- 🎯 **Runs only what changed** (affected packages detection)
+- 📦 **Optimized task pipeline** (build → test → lint)
+- 🔄 **Incremental builds** for massive monorepos
+
+Configuration: [`turbo.json`](turbo.json)
 
 ## 📊 Testing Strategy
 
