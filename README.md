@@ -1,20 +1,20 @@
-# 🛍️ MicroShop - Estudo de Arquitetura Microfrontends
+# 🛍️ MicroShop - Microfrontend E-commerce
 
 ![CI](https://github.com/jonasmessias/microfrontend/actions/workflows/ci.yml/badge.svg)
 
-> 📚 **Projeto de Estudo** - Este é um projeto educacional criado para aprender e demonstrar os conceitos fundamentais da arquitetura de microfrontends usando **Webpack Module Federation**.
+Exemplo de **arquitetura de microfrontends** aplicada a um e-commerce, usando **Webpack Module Federation** para demonstrar estratégias de deployment independente e escalabilidade.
 
 ## 🎯 Propósito
 
-Este projeto foi desenvolvido como uma **jornada de aprendizado** para entender na prática como funciona a arquitetura de microfrontends. O objetivo é explorar:
+Demonstrar padrões avançados de arquitetura frontend para aplicações de larga escala, onde múltiplos times podem trabalhar independentemente em diferentes features mantendo uma experiência de usuário coesa.
 
-- ✅ Como **Module Federation** permite compartilhar código em runtime
-- ✅ Como múltiplas aplicações React podem ser **integradas dinamicamente**
-- ✅ Como gerenciar **estado compartilhado** entre microfrontends
-- ✅ Como implementar **comunicação entre MFEs** de forma desacoplada
-- ✅ Quando usar (e quando NÃO usar) arquitetura de microfrontends
+**Conceitos implementados:**
 
-> ⚠️ **Nota**: Este é um projeto educacional/demonstrativo, não uma aplicação de produção. Foi criado para fins de aprendizado e compreensão dos padrões arquiteturais de microfrontends.
+- ✅ **Module Federation** para compartilhamento de código em runtime
+- ✅ **Integração dinâmica** de múltiplas aplicações React
+- ✅ **Estado compartilhado** entre microfrontends com Zustand
+- ✅ **Comunicação desacoplada** via EventBus
+- ✅ **Deployment independente** de cada microfrontend
 
 ## 🏗️ Architecture
 
@@ -30,14 +30,14 @@ packages/
 
 ### Module Federation com Webpack
 
-Este projeto utiliza **Webpack Module Federation** (solução madura e estável) para compartilhar componentes entre microfrontends:
+**Webpack Module Federation** é usado para compartilhar componentes entre microfrontends em runtime:
 
 - **Shell (Host)**: Orquestra a aplicação, gerencia roteamento e carrega MFEs remotos dinamicamente
 - **Products MFE**: Expõe catálogo de produtos e funcionalidade de busca
 - **Cart MFE**: Expõe gerenciamento do carrinho e estado compartilhado (Zustand)
 - **Deployment Independente**: Cada MFE pode ser implantado separadamente sem afetar os outros
 
-**Por que Webpack e não Vite?** Durante este estudo, aprendi que plugins de Module Federation para Vite (como `@originjs/vite-plugin-federation`) ainda não são maduros para produção. Webpack 5 tem suporte nativo e estável para Module Federation desde 2020, sendo a escolha mais confiável para aprender os conceitos corretamente.
+**Por que Webpack?** Webpack 5 tem suporte nativo e estável para Module Federation desde 2020, sendo amplamente usado em produção por empresas como Spotify, Microsoft e Bytedance.
 
 ## 🚀 Stack Tecnológica
 
@@ -86,21 +86,23 @@ Este projeto utiliza **Webpack Module Federation** (solução madura e estável)
 
 ### Quando Usar Microfrontends?
 
-Durante este estudo, aprendi que microfrontends **NÃO** são para todos os casos:
+Microfrontends não são adequados para todos os cenários:
 
-#### ✅ Use quando:
-- Múltiplos times trabalhando em features isoladas
+#### ✅ Casos de uso ideais:
+
+- Múltiplos times autônomos trabalhando em features isoladas
 - Necessidade de deploy independente de partes da aplicação
-- Diferentes stacks/versões do framework por domínio
-- Aplicação muito grande que precisa ser dividida
+- Diferentes stacks ou versões do framework por domínio
+- Aplicações de larga escala que precisam ser divididas
 
-#### ❌ NÃO use quando:
+#### ❌ Evite quando:
+
 - Time pequeno ou único time
-- Aplicação simples/média (use monolito modular)
-- Performance é crítica (overhead de Module Federation)
+- Aplicação de pequeno/médio porte (prefira monolito modular)
+- Performance é crítica (há overhead de Module Federation)
 - Não há necessidade real de deploy independente
 
-> 💡 **Lição Principal**: Microfrontends resolvem problemas de **organização de times e deployment**, não problemas técnicos. A complexidade adicional só vale a pena quando há benefícios organizacionais claros.
+> 💡 Microfrontends resolvem problemas de **organização e deployment**, não problemas técnicos. Use quando os benefícios organizacionais justificarem a complexidade adicional.
 
 ## 🛠️ Como Executar
 
@@ -263,7 +265,7 @@ Configuração: [`turbo.json`](turbo.json)
 - **Testes de Integração**: Comunicação via EventBus
 - **Cobertura**: 70% de threshold para branches, funções e linhas
 
-## 🚢 Deployment (Conceitual)
+## 🚢 Deployment
 
 Cada microfrontend pode ser implantado independentemente:
 
@@ -276,11 +278,7 @@ Variáveis de ambiente controlam URLs remotas:
 - Development: `localhost:300x`
 - Production: Configurável via `.env.production`
 
-> 💡 **Nota de Aprendizado**: Este projeto demonstra os conceitos de deployment independente, mas não inclui configuração real de CI/CD ou hospedagem, pois o foco é educacional.
-
-## 📚 Recursos de Aprendizado
-
-Durante o desenvolvimento deste projeto, os seguintes recursos foram úteis:
+## 📚 Recursos Úteis
 
 - [Webpack Module Federation Docs](https://webpack.js.org/concepts/module-federation/)
 - [Micro Frontends - Martin Fowler](https://martinfowler.com/articles/micro-frontends.html)
@@ -302,6 +300,4 @@ MIT
 
 ---
 
-**💡 Projeto desenvolvido para fins educacionais** - Criado para aprender e demonstrar os conceitos fundamentais da arquitetura de microfrontends com Webpack Module Federation.
-
-Se você está estudando microfrontends, sinta-se livre para explorar o código, fazer fork e experimentar! 🚀
+Exemplo de arquitetura de microfrontends com Webpack Module Federation. 🚀
