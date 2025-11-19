@@ -5,10 +5,12 @@ const path = require('path');
 module.exports = {
   entry: './src/index.tsx',
   mode: 'development',
+  devtool: 'eval-source-map',
 
   devServer: {
     port: 3001,
     hot: true,
+    historyApiFallback: true,
     headers: {
       'Access-Control-Allow-Origin': '*',
     },
@@ -52,11 +54,9 @@ module.exports = {
     new ModuleFederationPlugin({
       name: 'mfeProducts',
       filename: 'remoteEntry.js',
-
       exposes: {
         './Products': './src/Products',
       },
-
       shared: {
         react: {
           singleton: true,
