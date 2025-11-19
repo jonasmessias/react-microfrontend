@@ -2,7 +2,7 @@
 
 ![CI](https://github.com/jonasmessias/microfrontend/actions/workflows/ci.yml/badge.svg)
 
-A modern e-commerce platform built with **Microfrontend Architecture** using Webpack Module Federation, demonstrating scalable and independent deployment strategies.
+A modern e-commerce platform built with **Microfrontend Architecture** using Vite Module Federation, demonstrating scalable and independent deployment strategies.
 
 > 🎯 **Portfolio Project** - Showcasing advanced frontend architecture patterns for large-scale React applications.
 
@@ -35,7 +35,7 @@ packages/
 
 - **React 18.3** - UI framework with concurrent features
 - **TypeScript 5.2** - Type safety and better DX
-- **Webpack 5** - Module Federation for runtime integration
+- **Vite 7.2** - Next-generation frontend tooling with Module Federation
 - **npm Workspaces** - Monorepo package management
 - **Turborepo** - High-performance build system for monorepos
 
