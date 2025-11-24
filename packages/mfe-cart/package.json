@@ -8,10 +8,8 @@
     "directory": "packages/mfe-cart"
   },
   "scripts": {
-    "dev": "vite",
-    "dev:webpack": "webpack serve --mode development",
+    "dev": "webpack serve --mode development",
     "build": "webpack --mode production",
-    "build:vite": "vite build",
     "preview": "vite preview",
     "test": "jest",
     "test:watch": "jest --watch",
