@@ -1,4 +1,6 @@
+import { memo } from 'react';
 import { CartItem as CartItemType } from '../../types/cart';
+import { splitPrice } from '../../utils/formatters';
 
 interface CartItemProps {
   item: CartItemType;
@@ -6,13 +8,9 @@ interface CartItemProps {
   onRemove: (id: string) => void;
 }
 
-export function CartItem({ item, onUpdateQuantity, onRemove }: CartItemProps) {
-  const formatPrice = (price: number) => {
-    return new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL',
-    }).format(price);
-  };
+function CartItemComponent({ item, onUpdateQuantity, onRemove }: CartItemProps) {
+  const { integer: priceInt, decimal: priceDec } = splitPrice(item.price);
+  const { integer: subtotalInt, decimal: subtotalDec } = splitPrice(item.price * item.quantity);
 
   return (
     <div className="p-4 flex gap-4">
@@ -33,8 +31,8 @@ export function CartItem({ item, onUpdateQuantity, onRemove }: CartItemProps) {
         {/* Price */}
         <div className="flex items-baseline gap-1 mb-2">
           <span className="text-xs text-gray-700">R$</span>
-          <span className="text-lg font-bold text-gray-900">{Math.floor(item.price)}</span>
-          <span className="text-xs text-gray-700">{(item.price % 1).toFixed(2).slice(1)}</span>
+          <span className="text-lg font-bold text-gray-900">{priceInt}</span>
+          <span className="text-xs text-gray-700">,{priceDec}</span>
         </div>
 
         {/* Stock status */}
@@ -79,14 +77,15 @@ export function CartItem({ item, onUpdateQuantity, onRemove }: CartItemProps) {
       <div className="text-right flex-shrink-0">
         <div className="flex items-baseline gap-1">
           <span className="text-xs text-gray-700">R$</span>
-          <span className="text-lg font-bold text-gray-900">
-            {Math.floor(item.price * item.quantity)}
-          </span>
-          <span className="text-xs text-gray-700">
-            {((item.price * item.quantity) % 1).toFixed(2).slice(1)}
-          </span>
+          <span className="text-lg font-bold text-gray-900">{subtotalInt}</span>
+          <span className="text-xs text-gray-700">,{subtotalDec}</span>
         </div>
       </div>
     </div>
   );
 }
+
+/**
+ * Memoized CartItem to prevent unnecessary re-renders
+ */
+export const CartItem = memo(CartItemComponent);

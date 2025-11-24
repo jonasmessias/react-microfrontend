@@ -1,3 +1,6 @@
+import { memo } from 'react';
+import { formatCurrency, splitPrice } from '../../utils/formatters';
+
 interface CartSummaryProps {
   itemCount: number;
   totalPrice: number;
@@ -5,13 +8,8 @@ interface CartSummaryProps {
   onClear: () => void;
 }
 
-export function CartSummary({ itemCount, totalPrice, onCheckout, onClear }: CartSummaryProps) {
-  const formatPrice = (price: number) => {
-    return new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL',
-    }).format(price);
-  };
+function CartSummaryComponent({ itemCount, totalPrice, onCheckout, onClear }: CartSummaryProps) {
+  const { integer: totalInt, decimal: totalDec } = splitPrice(totalPrice);
 
   return (
     <div className="bg-white rounded-lg border border-gray-200 p-4">
@@ -25,8 +23,8 @@ export function CartSummary({ itemCount, totalPrice, onCheckout, onClear }: Cart
         </div>
         <div className="flex items-baseline gap-1">
           <span className="text-sm text-gray-700">R$</span>
-          <span className="text-2xl font-bold text-gray-900">{Math.floor(totalPrice)}</span>
-          <span className="text-sm text-gray-700">{(totalPrice % 1).toFixed(2).slice(1)}</span>
+          <span className="text-2xl font-bold text-gray-900">{totalInt}</span>
+          <span className="text-sm text-gray-700">,{totalDec}</span>
         </div>
       </div>
 
@@ -63,7 +61,7 @@ export function CartSummary({ itemCount, totalPrice, onCheckout, onClear }: Cart
       <div className="mt-4 pt-4 border-t border-gray-200 space-y-2">
         <div className="flex justify-between text-xs text-gray-700">
           <span>Itens:</span>
-          <span>{formatPrice(totalPrice)}</span>
+          <span>{formatCurrency(totalPrice)}</span>
         </div>
         <div className="flex justify-between text-xs text-gray-700">
           <span>Frete e manuseio:</span>
@@ -71,17 +69,22 @@ export function CartSummary({ itemCount, totalPrice, onCheckout, onClear }: Cart
         </div>
         <div className="flex justify-between text-xs text-gray-700">
           <span>Total antes dos impostos:</span>
-          <span>{formatPrice(totalPrice)}</span>
+          <span>{formatCurrency(totalPrice)}</span>
         </div>
         <div className="flex justify-between text-xs text-gray-700">
           <span>Imposto estimado:</span>
-          <span>{formatPrice(0)}</span>
+          <span>{formatCurrency(0)}</span>
         </div>
         <div className="flex justify-between text-lg font-bold text-microshop-link-hover pt-2 border-t border-gray-200">
           <span>Total do pedido:</span>
-          <span>{formatPrice(totalPrice)}</span>
+          <span>{formatCurrency(totalPrice)}</span>
         </div>
       </div>
     </div>
   );
 }
+
+/**
+ * Memoized CartSummary to prevent unnecessary re-renders
+ */
+export const CartSummary = memo(CartSummaryComponent);
