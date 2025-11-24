@@ -1,4 +1,4 @@
-import { splitPrice } from '../../utils/formatters';
+import { splitPrice } from '../../lib/helpers';
 
 interface PriceProps {
   value: number;

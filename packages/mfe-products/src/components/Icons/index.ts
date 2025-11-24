@@ -1,1 +1,1 @@
-export { SearchIcon, CartIcon, CloseIcon, StarIcon } from './Icons';
+export { CartIcon, CloseIcon, SearchIcon, StarIcon } from './Icons';

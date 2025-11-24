@@ -1,5 +1,5 @@
 import { FormEvent } from 'react';
-import { CATEGORIES } from '../constants';
+import { CATEGORIES } from '../lib/config';
 import { Button } from './Button';
 import { SearchIcon } from './Icons';
 
@@ -31,9 +31,7 @@ export function SearchBar({
   };
 
   const searchInfo =
-    selectedCategory !== 'Todos'
-      ? `${activeSearchTerm} em ${selectedCategory}`
-      : activeSearchTerm;
+    selectedCategory !== 'Todos' ? `${activeSearchTerm} em ${selectedCategory}` : activeSearchTerm;
 
   return (
     <form onSubmit={handleSubmit} className="flex-1 max-w-3xl mx-4">
@@ -53,11 +51,7 @@ export function SearchBar({
           placeholder="Buscar produtos"
           className="flex-1 px-4 py-2 text-gray-900 outline-none focus:ring-2 focus:ring-microshop-orange"
         />
-        <Button
-          type="submit"
-          className="rounded-l-none px-4"
-          aria-label="Buscar"
-        >
+        <Button type="submit" className="rounded-l-none px-4" aria-label="Buscar">
           <SearchIcon className="w-5 h-5" />
         </Button>
       </div>
@@ -67,12 +61,7 @@ export function SearchBar({
           <span className="text-xs">
             🔍 <span className="font-semibold">{searchInfo}</span>
           </span>
-          <Button
-            type="button"
-            onClick={onClearSearch}
-            variant="link"
-            className="text-xs"
-          >
+          <Button type="button" onClick={onClearSearch} variant="link" className="text-xs">
             Limpar ✕
           </Button>
         </div>

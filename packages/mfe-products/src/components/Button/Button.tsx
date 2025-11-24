@@ -27,7 +27,8 @@ export function Button({
   const variantClass = VARIANT_CLASSES[variant];
   const widthClass = fullWidth ? 'w-full' : '';
   const disabledClass = disabled ? 'opacity-50 cursor-not-allowed' : '';
-  const baseClass = variant === 'link' ? '' : 'text-sm py-2 px-4 rounded-lg transition-colors duration-150';
+  const baseClass =
+    variant === 'link' ? '' : 'text-sm py-2 px-4 rounded-lg transition-colors duration-150';
 
   const classes = `${baseClass} ${variantClass} ${widthClass} ${disabledClass} ${className}`.trim();
 

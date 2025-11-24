@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { EVENT_NAMES } from '../constants';
+import { EVENT_NAMES } from '../lib/config';
 
 export interface UseSearchReturn {
   selectedCategory: string;

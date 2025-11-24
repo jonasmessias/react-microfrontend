@@ -85,7 +85,11 @@ export default function Products() {
       </div>
 
       {searchInfo && (
-        <Button variant="link" onClick={clearSearch} className="mb-4 text-sm flex items-center gap-1">
+        <Button
+          variant="link"
+          onClick={clearSearch}
+          className="mb-4 text-sm flex items-center gap-1"
+        >
           <div className="w-4 h-4">
             <CloseIcon />
           </div>

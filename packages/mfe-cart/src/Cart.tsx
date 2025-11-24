@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { CartItem } from './components/CartItem';
 import { CartSummary } from './components/CartSummary';
-import { CartIcon } from './components/Icons';
 import { EmptyState } from './components/EmptyState';
+import { CartIcon } from './components/Icons';
 import { useCartStore } from './store/cartStore';
 import { CartAddItemEvent, EventBus } from './utils/eventBus';
 

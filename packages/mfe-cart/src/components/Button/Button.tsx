@@ -13,7 +13,8 @@ const VARIANT_CLASSES: Record<ButtonVariant, string> = {
     'bg-microshop-yellow-bright hover:bg-microshop-yellow-bright-hover active:bg-microshop-yellow-bright-active border border-microshop-yellow-bright-border shadow-sm text-gray-900 font-medium',
   secondary:
     'bg-white hover:bg-gray-50 active:bg-gray-100 border border-gray-300 shadow-sm text-gray-900 font-medium',
-  danger: 'bg-red-500 hover:bg-red-600 active:bg-red-700 border border-red-600 shadow-sm text-white font-medium',
+  danger:
+    'bg-red-500 hover:bg-red-600 active:bg-red-700 border border-red-600 shadow-sm text-white font-medium',
   link: 'bg-transparent border-0 shadow-none text-microshop-link hover:text-microshop-link-hover hover:underline p-0',
 };
 

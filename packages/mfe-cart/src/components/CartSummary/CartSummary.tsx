@@ -1,7 +1,7 @@
 import { memo } from 'react';
+import { formatCurrency } from '../../lib/helpers';
 import { Button } from '../Button';
 import { Price } from '../Price';
-import { formatCurrency } from '../../utils/formatters';
 
 interface CartSummaryProps {
   itemCount: number;

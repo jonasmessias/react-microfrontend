@@ -1,5 +1,5 @@
 import { memo, useMemo } from 'react';
-import { EVENT_NAMES, RATING_CONFIG } from '../../constants';
+import { EVENT_NAMES, RATING_CONFIG } from '../../lib/config';
 import { Product } from '../../types/product';
 import { CartAddItemEvent, EventBus } from '../../utils/eventBus';
 import { Button } from '../Button';
