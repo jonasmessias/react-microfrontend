@@ -1,15 +1,9 @@
-/**
- * Event names used in this MFE
- */
 export const EVENT_NAMES = {
   CART_ADD_ITEM: 'cart:add-item',
   PRODUCT_SEARCH: 'product:search',
   PRODUCT_SEARCH_CLEAR: 'product:search:clear',
 } as const;
 
-/**
- * Product categories
- */
 export const CATEGORIES = [
   'Todos',
   'Eletrônicos',
@@ -20,9 +14,6 @@ export const CATEGORIES = [
   'Periféricos',
 ] as const;
 
-/**
- * Rating configuration
- */
 export const RATING_CONFIG = {
   MIN: 3.0,
   MAX: 5.0,

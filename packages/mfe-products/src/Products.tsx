@@ -1,4 +1,7 @@
 import { useEffect, useState } from 'react';
+import { Button } from './components/Button';
+import { EmptyState } from './components/EmptyState';
+import { CloseIcon, SearchIcon } from './components/Icons';
 import { ProductGrid } from './components/ProductGrid';
 import { useProductsStore } from './store/productsStore';
 
@@ -7,7 +10,6 @@ export default function Products() {
   const [filteredProducts, setFilteredProducts] = useState(products);
   const [searchInfo, setSearchInfo] = useState<{ term: string; category: string } | null>(null);
 
-  // Listener for search events from Shell
   useEffect(() => {
     const handleSearch = (event: Event) => {
       const customEvent = event as CustomEvent<{ searchTerm: string; category: string }>;
@@ -15,7 +17,6 @@ export default function Products() {
 
       setSearchInfo({ term: searchTerm, category });
 
-      // Filter products
       const filtered = products.filter((product) => {
         const matchesSearch =
           product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -44,12 +45,25 @@ export default function Products() {
     };
   }, [products]);
 
-  // Reset when there is no search
   useEffect(() => {
     if (!searchInfo) {
       setFilteredProducts(products);
     }
   }, [products, searchInfo]);
+
+  const clearSearch = () => {
+    setSearchInfo(null);
+    setFilteredProducts(products);
+  };
+
+  const renderResultsCount = () => {
+    const count = filteredProducts.length;
+    const resultText = count === 1 ? 'resultado' : 'resultados';
+    const categoryText =
+      searchInfo && searchInfo.category !== 'Todos' ? ` em ${searchInfo.category}` : '';
+
+    return `${count} ${resultText}${categoryText}`;
+  };
 
   return (
     <div>
@@ -63,67 +77,32 @@ export default function Products() {
         </span>
       </div>
 
-      {/* Title section */}
       <div className="mb-6">
         <h1 className="text-2xl font-medium text-gray-900 mb-1">
           {searchInfo ? `Resultados para "${searchInfo.term}"` : 'Produtos em Destaque'}
         </h1>
-        <p className="text-sm text-gray-600">
-          {filteredProducts.length} {filteredProducts.length === 1 ? 'resultado' : 'resultados'}
-          {searchInfo && searchInfo.category !== 'Todos' && ` em ${searchInfo.category}`}
-        </p>
+        <p className="text-sm text-gray-600">{renderResultsCount()}</p>
       </div>
 
       {searchInfo && (
-        <button
-          onClick={() => {
-            setSearchInfo(null);
-            setFilteredProducts(products);
-          }}
-          className="mb-4 text-sm text-microshop-link hover:text-microshop-link-hover hover:underline flex items-center gap-1"
-        >
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
+        <Button variant="link" onClick={clearSearch} className="mb-4 text-sm flex items-center gap-1">
+          <div className="w-4 h-4">
+            <CloseIcon />
+          </div>
           Limpar busca
-        </button>
+        </Button>
       )}
 
-      {/* Products Grid */}
       {filteredProducts.length > 0 ? (
         <ProductGrid products={filteredProducts} />
       ) : (
-        <div className="bg-white rounded-lg border border-gray-200 p-12 text-center">
-          <svg
-            className="w-24 h-24 mx-auto text-gray-300 mb-4"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={1.5}
-              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-            />
-          </svg>
-          <h3 className="text-xl font-medium text-gray-900 mb-2">Nenhum produto encontrado</h3>
-          <p className="text-gray-600 mb-4">Tente buscar por outro termo ou categoria</p>
-          <button
-            onClick={() => {
-              setSearchInfo(null);
-              setFilteredProducts(products);
-            }}
-            className="text-microshop-link hover:text-microshop-link-hover hover:underline"
-          >
-            Ver todos os produtos
-          </button>
-        </div>
+        <EmptyState
+          icon={<SearchIcon />}
+          title="Nenhum produto encontrado"
+          description="Tente buscar por outro termo ou categoria"
+          actionLabel="Ver todos os produtos"
+          onAction={clearSearch}
+        />
       )}
     </div>
   );

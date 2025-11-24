@@ -9,6 +9,7 @@ Demonstração prática de **arquitetura de microfrontends** aplicada a um e-com
 Este é um **showcase técnico** que demonstra a implementação de microfrontends em um cenário real de e-commerce. O objetivo é ilustrar como diferentes times podem desenvolver e deployar features independentemente mantendo uma experiência de usuário integrada.
 
 **Conceitos demonstrados:**
+
 - Module Federation para compartilhamento de código em runtime
 - Deployment e desenvolvimento independente de cada microfrontend
 - Estado compartilhado entre aplicações via Zustand
@@ -42,6 +43,7 @@ Cada microfrontend é uma **aplicação React independente** que pode ser desenv
 - **Cart MFE**: Expõe componente `Cart` e `cartStore` (Zustand) via Module Federation
 
 **Fluxo de comunicação:**
+
 ```
 Products → EventBus → Cart (adicionar item)
 Cart → Zustand Store → Shell (contador de itens)
@@ -96,21 +98,25 @@ npm run test:coverage --workspace=shell   # Cobertura de testes
 ## Destaques Técnicos
 
 ### Arquitetura
+
 - **Deployment Independente**: Cada MFE pode ser deployado sem afetar os outros
 - **Autonomia Completa**: Cada MFE tem suas próprias utils, types, constants e testes
 - **Zero Acoplamento**: Comunicação via Module Federation e EventBus apenas
 
 ### Clean Code
+
 - **Componentes Pequenos**: App.tsx com ~80 linhas (refatorado de 300+)
 - **Single Responsibility**: Componentes focados e reutilizáveis
 - **Type Safety**: TypeScript strict mode em todo o código
 
 ### Performance
+
 - **React.memo**: Componentes otimizados (ProductCard, CartItem, CartSummary)
 - **Lazy Loading**: MFEs carregados sob demanda
 - **Code Splitting**: Via Module Federation
 
 ### Qualidade
+
 - **Testes**: 70%+ de cobertura
 - **ESLint + Prettier**: Code quality e formatação consistente
 - **Error Boundaries**: Isolamento de falhas por MFE
