@@ -2,34 +2,37 @@
 
 Host application for Module Federation architecture.
 
-## Development
+## Development & Production
 
-Uses **Vite** for fast development with HMR:
-
-```bash
-npm run dev          # Vite dev server (port 3000)
-npm run dev:webpack  # Webpack dev server (fallback)
-```
-
-## Production Build
-
-Uses **Webpack** for Module Federation production build:
+Uses **Webpack** for both development and production with Module Federation:
 
 ```bash
-npm run build        # Webpack production build with Module Federation
-npm run preview      # Preview production build
+npm run dev       # Webpack dev server with HMR (port 3000)
+npm run build     # Webpack production build
+npm run preview   # Preview production build
 ```
 
 ## Architecture
 
-- **Dev**: Vite (fast HMR, instant server start)
-- **Prod**: Webpack (Module Federation support)
-- **Remotes**: Loads mfe-products and mfe-cart dynamically
+- **Dev**: Webpack with Module Federation + HMR
+- **Prod**: Webpack with Module Federation optimized build
+- **Remotes**: Dynamically loads mfe-products (3001) and mfe-cart (3002)
 
 ## Tech Stack
 
 - React 18.3
 - TypeScript 5.2
 - Tailwind CSS 3.4
-- Vite 7 (dev) + Webpack 5 (prod)
-- Module Federation
+- Webpack 5 (Module Federation)
+- Zustand (shared state)
+
+## Module Federation
+
+Configured to consume:
+- `mfeProducts@http://localhost:3001/remoteEntry.js`
+- `mfeCart@http://localhost:3002/remoteEntry.js`
+
+Shared dependencies:
+- React (singleton)
+- React-DOM (singleton)
+- Zustand (singleton)
