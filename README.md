@@ -53,7 +53,12 @@ packages/
 🎯 **Zero Acoplamento**: Comunicação apenas via Module Federation e EventBus  
 🎯 **Deploy Independente**: Cada MFE pode ser deployado sem afetar outros
 
-### Module Federation com Webpack
+### Module Federation com Webpack + Vite
+
+Este projeto usa uma **abordagem híbrida** para melhor experiência de desenvolvimento:
+
+- **Development (Vite)**: Dev server ultra-rápido com HMR instantâneo usando `@originjs/vite-plugin-federation`
+- **Production (Webpack)**: Build otimizado com Module Federation nativo do Webpack 5
 
 **Webpack Module Federation** é usado para compartilhar componentes entre microfrontends em runtime:
 
@@ -64,13 +69,16 @@ packages/
 
 **Por que Webpack?** Webpack 5 tem suporte nativo e estável para Module Federation desde 2020, sendo amplamente usado em produção por empresas como Spotify, Microsoft e Bytedance.
 
+**Por que Vite no dev?** Vite oferece HMR (Hot Module Replacement) instantâneo usando ESM nativo do browser, resultando em tempos de inicialização ~10x mais rápidos comparado ao Webpack dev server.
+
 ## 🚀 Stack Tecnológica
 
 ### Tecnologias Principais
 
 - **React 18.3** - Framework UI com recursos de renderização concorrente
 - **TypeScript 5.2** - Type safety e melhor experiência de desenvolvimento
-- **Webpack 5.103** - Bundler com suporte nativo a Module Federation
+- **Vite 7.2** - Dev server ultra-rápido com HMR instantâneo
+- **Webpack 5.103** - Production bundler com Module Federation nativo
 - **npm Workspaces** - Gerenciamento de pacotes no monorepo
 - **Turborepo** - Sistema de build de alta performance para monorepos
 
@@ -151,15 +159,22 @@ npm install
 
 ```bash
 # Execute todos os microfrontends simultaneamente (via Turborepo)
-npm run dev
+npm run dev          # Usa Webpack dev server
 
-# Ou execute individualmente
-npm run dev:shell      # http://localhost:3000
-npm run dev:products   # http://localhost:3001
-npm run dev:cart       # http://localhost:3002
+# Ou com Vite (desenvolvimento mais rápido - recomendado)
+npm run dev:shell      # http://localhost:3000 (Vite)
+npm run dev:products   # http://localhost:3001 (Vite)
+npm run dev:cart       # http://localhost:3002 (Vite)
+
+# Ou execute individualmente com Webpack
+npm run dev --workspace=shell
+npm run dev --workspace=mfe-products
+npm run dev --workspace=mfe-cart
 ```
 
 Abra http://localhost:3000 no navegador para ver a aplicação Shell carregando os microfrontends remotos.
+
+> 💡 **Tip:** Use `dev:vite` scripts para desenvolvimento mais rápido. O Vite oferece HMR instantâneo e cold start ~10x mais rápido.
 
 ### Testes
 
@@ -183,6 +198,7 @@ npm run test:coverage --workspace=shell
 
 ```bash
 # Build de todos os pacotes (com cache do Turborepo)
+# Usa Webpack para production build com Module Federation
 npm run build
 
 # Build individual
@@ -193,6 +209,8 @@ npm run build:cart
 # Limpar artefatos de build
 npm run clean
 ```
+
+> ⚠️ **Importante:** Production builds usam Webpack, não Vite. Webpack Module Federation é mais estável e amplamente testado em produção.
 
 ## 📦 Estrutura dos Pacotes
 
