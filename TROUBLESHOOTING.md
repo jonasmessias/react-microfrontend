@@ -15,6 +15,7 @@ GET http://localhost:3002/remoteEntry.js net::ERR_ABORTED 404 (Not Found)
 ### Solução
 
 #### 1. Limpar Turbo daemon
+
 ```bash
 npx turbo daemon clean
 ```
@@ -22,6 +23,7 @@ npx turbo daemon clean
 #### 2. Parar todos os processos (Ctrl+C)
 
 #### 3. Rodar novamente
+
 ```bash
 npm run dev
 ```
@@ -29,6 +31,7 @@ npm run dev
 ### Verificação
 
 Você deve ver:
+
 ```
 @microshop/shell:dev: > vite
 @microshop/mfe-products:dev: > vite
@@ -45,7 +48,7 @@ Se o problema persistir, rode individualmente:
 # Terminal 1
 cd packages/mfe-products && npm run dev
 
-# Terminal 2  
+# Terminal 2
 cd packages/mfe-cart && npm run dev
 
 # Terminal 3

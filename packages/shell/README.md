@@ -29,10 +29,12 @@ npm run preview   # Preview production build
 ## Module Federation
 
 Configured to consume:
+
 - `mfeProducts@http://localhost:3001/remoteEntry.js`
 - `mfeCart@http://localhost:3002/remoteEntry.js`
 
 Shared dependencies:
+
 - React (singleton)
 - React-DOM (singleton)
 - Zustand (singleton)
