@@ -1,1 +1,1 @@
-export { EVENT_NAMES, CATEGORIES, MFE_REMOTES } from './constants';
+export { CATEGORIES, EVENT_NAMES, MFE_REMOTES } from './constants';

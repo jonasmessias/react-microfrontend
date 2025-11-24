@@ -1,1 +1,1 @@
-export { EVENT_NAMES, CATEGORIES, RATING_CONFIG } from './constants';
+export { CATEGORIES, EVENT_NAMES, RATING_CONFIG } from './constants';

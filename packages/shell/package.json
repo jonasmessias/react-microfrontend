@@ -8,8 +8,8 @@
     "directory": "packages/shell"
   },
   "scripts": {
-    "dev": "webpack serve --mode development --env env=development",
-    "dev:vite": "vite",
+    "dev": "vite",
+    "dev:webpack": "webpack serve --mode development --env env=development",
     "build": "webpack --mode production --env env=production",
     "build:vite": "vite build",
     "preview": "vite preview",

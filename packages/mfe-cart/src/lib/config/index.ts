@@ -1,1 +1,1 @@
-export { EVENT_NAMES, CART_CONFIG } from './constants';
+export { CART_CONFIG, EVENT_NAMES } from './constants';

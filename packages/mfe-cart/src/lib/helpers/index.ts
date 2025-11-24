@@ -1,1 +1,1 @@
-export { formatCurrency, splitPrice, formatNumber } from './formatters';
+export { formatCurrency, formatNumber, splitPrice } from './formatters';
