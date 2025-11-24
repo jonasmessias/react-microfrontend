@@ -1,27 +1,28 @@
+import { memo } from 'react';
+import { EVENT_NAMES, RATING_CONFIG } from '../../constants';
 import { Product } from '../../types/product';
 import { CartAddItemEvent, EventBus } from '../../utils/eventBus';
+import { splitPrice } from '../../utils/formatters';
 
 interface ProductCardProps {
   product: Product;
 }
 
-export function ProductCard({ product }: ProductCardProps) {
+function ProductCardComponent({ product }: ProductCardProps) {
   const handleAddToCart = () => {
-    EventBus.emit<CartAddItemEvent>('cart:add-item', {
+    EventBus.emit<CartAddItemEvent>(EVENT_NAMES.CART_ADD_ITEM, {
       product,
       quantity: 1,
     });
   };
 
-  const formatPrice = (price: number) => {
-    return new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL',
-    }).format(price);
-  };
+  const { integer: priceInt, decimal: priceDec } = splitPrice(product.price);
 
   // Mock rating (Amazon style)
-  const rating = (Math.random() * 2 + 3).toFixed(1); // 3.0 - 5.0
+  const rating = (
+    Math.random() * (RATING_CONFIG.MAX - RATING_CONFIG.MIN) +
+    RATING_CONFIG.MIN
+  ).toFixed(1);
   const reviews = Math.floor(Math.random() * 5000) + 100;
 
   return (
@@ -53,7 +54,7 @@ export function ProductCard({ product }: ProductCardProps) {
               <svg
                 key={i}
                 className={`w-4 h-4 ${
-                  i < Math.floor(parseFloat(rating)) ? 'text-[#f fa541]' : 'text-gray-300'
+                  i < Math.floor(parseFloat(rating)) ? 'text-[#ffa541]' : 'text-gray-300'
                 }`}
                 fill="currentColor"
                 viewBox="0 0 20 20"
@@ -71,8 +72,8 @@ export function ProductCard({ product }: ProductCardProps) {
         <div className="mb-3">
           <div className="flex items-baseline">
             <span className="text-xs align-super text-gray-700 mr-1">R$</span>
-            <span className="text-2xl font-normal text-gray-900">{Math.floor(product.price)}</span>
-            <span className="text-xs text-gray-700">{(product.price % 1).toFixed(2).slice(1)}</span>
+            <span className="text-2xl font-normal text-gray-900">{priceInt}</span>
+            <span className="text-xs text-gray-700">,{priceDec}</span>
           </div>
           <div className="h-4 text-xs text-gray-600">
             {Math.random() > 0.6 && (
@@ -99,3 +100,8 @@ export function ProductCard({ product }: ProductCardProps) {
     </div>
   );
 }
+
+/**
+ * Memoized ProductCard to prevent unnecessary re-renders
+ */
+export const ProductCard = memo(ProductCardComponent);
