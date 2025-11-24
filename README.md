@@ -18,15 +18,40 @@ Demonstrar padrões avançados de arquitetura frontend para aplicações de larg
 
 ## 🏗️ Architecture
 
-**Monorepo Structure** with independent microfrontends powered by **Turborepo**:
+**Monorepo Structure** with **fully independent microfrontends** powered by **Turborepo**:
 
 ```
 packages/
 ├── shell/              # Host application (port 3000)
+│   ├── components/    # UI components (SearchBar, Logo, Footer, etc)
+│   ├── hooks/         # Custom hooks (useSearch, useCartCount)
+│   ├── constants/     # Event names, categories, MFE remotes
+│   └── App.tsx        # Main app (refactored to 80 lines)
+│
 ├── mfe-products/       # Products catalog MFE (port 3001)
+│   ├── components/    # ProductCard, ProductGrid
+│   ├── types/         # Product types
+│   ├── utils/         # EventBus, formatters
+│   ├── constants/     # Event names, rating config
+│   └── store/         # Zustand store
+│
 ├── mfe-cart/           # Shopping cart MFE (port 3002)
+│   ├── components/    # CartItem, CartSummary
+│   ├── types/         # Cart types
+│   ├── utils/         # EventBus, formatters
+│   ├── constants/     # Event names, cart config
+│   └── store/         # Zustand store
+│
 └── design-system/      # Shared design tokens
+    └── tokens.js      # Colors, spacing, animations
 ```
+
+### Princípios de Arquitetura
+
+🎯 **Autonomia Total**: Cada MFE é um projeto independente com suas próprias utils, types e constants  
+🎯 **Ownership Claro**: Cada time é responsável por seu MFE completo  
+🎯 **Zero Acoplamento**: Comunicação apenas via Module Federation e EventBus  
+🎯 **Deploy Independente**: Cada MFE pode ser deployado sem afetar outros
 
 ### Module Federation com Webpack
 
@@ -174,29 +199,45 @@ npm run clean
 ### Shell (Aplicação Host)
 
 - **Porta**: 3000
-- **Responsabilidade**: Shell da aplicação, navegação, orquestração do estado global
+- **Responsabilidade**: Orquestração da aplicação, carrega MFEs remotos
 - **Expõe**: Nada (apenas host)
 - **Consome**: `mfe-products/Products`, `mfe-cart/Cart`, `mfe-cart/cartStore`
+- **Estrutura Interna**:
+  - `components/` - SearchBar, Logo, HeaderActions, Navigation, Footer
+  - `hooks/` - useSearch (busca), useCartCount (sincronização)
+  - `constants/` - EVENT_NAMES, CATEGORIES, MFE_REMOTES
 
 ### mfe-products (Catálogo de Produtos)
 
 - **Porta**: 3001
 - **Responsabilidade**: Listagem de produtos, busca, filtros
 - **Expõe**: Componente `./Products`
-- **Dependências**: Zustand para estado local
+- **Estrutura Interna**:
+  - `components/` - ProductCard (React.memo), ProductGrid
+  - `types/` - Product interface
+  - `utils/` - EventBus, formatCurrency, splitPrice
+  - `constants/` - EVENT_NAMES, CATEGORIES, RATING_CONFIG
+  - `store/` - productsStore (Zustand)
 
 ### mfe-cart (Carrinho de Compras)
 
 - **Porta**: 3002
 - **Responsabilidade**: Gerenciamento do carrinho, checkout
 - **Expõe**: Componente `./Cart`, store `./cartStore` (Zustand)
-- **Estado Compartilhado**: Store do carrinho acessível do Shell para contador de badge
+- **Estado Compartilhado**: Store acessível do Shell para contador
+- **Estrutura Interna**:
+  - `components/` - CartItem (React.memo), CartSummary (React.memo)
+  - `types/` - CartItem interface
+  - `utils/` - EventBus, formatCurrency, splitPrice, formatNumber
+  - `constants/` - EVENT_NAMES, CART_CONFIG
+  - `store/` - cartStore (Zustand)
 
 ### design-system
 
 - **Propósito**: Design tokens centralizados e configuração do Tailwind
 - **Versionamento**: SemVer para evolução segura
 - **Tokens**: Cores, espaçamento, animações
+- **Uso**: Cada MFE importa como preset do Tailwind
 
 ## 🎨 Design System
 
@@ -286,13 +327,28 @@ Variáveis de ambiente controlam URLs remotas:
 
 ## 🤝 Boas Práticas Implementadas
 
-1. **Responsabilidade Única**: Cada MFE possui um domínio de negócio
-2. **Baixo Acoplamento**: Comunicação via eventos e estado compartilhado
-3. **Deployment Independente**: Não requer deployments em cascata
-4. **Type Safety**: Cobertura completa de TypeScript
-5. **Isolamento de Erros**: ErrorBoundary por MFE
-6. **Consistência de Design**: Design system centralizado
-7. **Cobertura de Testes**: Testes unitários e de integração abrangentes
+### Arquitetura
+1. **Autonomia Completa**: Cada MFE é totalmente independente com suas próprias utils
+2. **Responsabilidade Única (SRP)**: Componentes pequenos e focados
+3. **Baixo Acoplamento**: Comunicação apenas via EventBus e Module Federation
+4. **Deployment Independente**: Zero dependência entre MFEs
+
+### Clean Code
+5. **DRY (Don't Repeat Yourself)**: Utilitários reutilizáveis em cada MFE
+6. **Nomenclatura Clara**: Nomes descritivos e semânticos
+7. **Componentes Pequenos**: App.tsx com 80 linhas (antes 300+)
+8. **Constantes Extraídas**: EVENT_NAMES, CATEGORIES, configs
+
+### Performance
+9. **React.memo**: ProductCard, CartItem, CartSummary otimizados
+10. **Lazy Loading**: MFEs carregados sob demanda
+11. **Code Splitting**: Webpack Module Federation
+
+### Qualidade
+12. **Type Safety**: TypeScript strict mode em todos os pacotes
+13. **ESLint + Prettier**: Linting e formatação consistentes
+14. **Error Boundaries**: Isolamento de falhas por MFE
+15. **Cobertura de Testes**: 70%+ em testes unitários e integração
 
 ## 📝 Licença
 
