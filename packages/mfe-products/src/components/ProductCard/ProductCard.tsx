@@ -38,11 +38,11 @@ function ProductCardComponent({ product }: ProductCardProps) {
         <img
           src={product.image}
           alt={product.name}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200 rounded"
         />
         {hasPrime && (
           <div className="absolute top-2 left-2 bg-[#00a8e1] text-white text-xs font-bold px-2 py-1 rounded">
-            prime
+            sale
           </div>
         )}
       </div>
