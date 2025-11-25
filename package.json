@@ -21,6 +21,8 @@
     "lint": "turbo run lint",
     "clean": "turbo run clean",
     "format": "prettier --write \"packages/**/*.{ts,tsx,json,css,md}\"",
+    "build:gh-pages": "turbo run build -- --mode production && node scripts/prepare-gh-pages.js",
+    "deploy:gh-pages": "npm run build:gh-pages && gh-pages -d dist",
     "version:shell": "npm version patch -w @microshop/shell --no-git-tag-version",
     "version:products": "npm version patch -w @microshop/mfe-products --no-git-tag-version",
     "version:cart": "npm version patch -w @microshop/mfe-cart --no-git-tag-version",
@@ -29,6 +31,8 @@
     "release:cart": "npm run version:cart && git add packages/mfe-cart/package.json && git commit -m 'chore(cart): bump version' && git push"
   },
   "devDependencies": {
+    "fs-extra": "^11.2.0",
+    "gh-pages": "^6.1.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^3.1.0",
     "turbo": "^2.6.1"

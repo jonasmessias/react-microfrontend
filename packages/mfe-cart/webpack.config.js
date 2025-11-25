@@ -2,31 +2,35 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { ModuleFederationPlugin } = require('webpack').container;
 const path = require('path');
 
-module.exports = {
-  entry: './src/index.tsx',
-  mode: 'development',
-  devtool: 'eval-source-map',
+module.exports = (env, argv) => {
+  const isDev = argv.mode === 'development';
+  const publicPath = process.env.PUBLIC_PATH || (isDev ? 'http://localhost:3002/' : '/microfrontend/cart/');
 
-  devServer: {
-    port: 3002,
-    hot: true,
-    historyApiFallback: true,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
+  return {
+    entry: './src/index.tsx',
+    mode: 'development',
+    devtool: 'eval-source-map',
+
+    devServer: {
+      port: 3002,
+      hot: true,
+      historyApiFallback: true,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+      },
     },
-  },
 
-  output: {
-    publicPath: 'auto',
-    clean: true,
-  },
+    output: {
+      publicPath,
+      clean: true,
+    },
 
-  resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx'],
-  },
+    resolve: {
+      extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    },
 
-  module: {
-    rules: [
+    module: {
+      rules: [
       {
         test: /\.tsx?$/,
         use: 'ts-loader',
@@ -47,34 +51,35 @@ module.exports = {
           },
         ],
       },
+      ],
+    },
+
+    plugins: [
+      new ModuleFederationPlugin({
+        name: 'mfeCart',
+        filename: 'remoteEntry.js',
+        exposes: {
+          './Cart': './src/Cart',
+          './cartStore': './src/store/cartStore',
+        },
+        shared: {
+          react: {
+            singleton: true,
+            requiredVersion: '^18.2.0',
+          },
+          'react-dom': {
+            singleton: true,
+            requiredVersion: '^18.2.0',
+          },
+          zustand: {
+            singleton: true,
+          },
+        },
+      }),
+
+      new HtmlWebpackPlugin({
+        template: './public/index.html',
+      }),
     ],
-  },
-
-  plugins: [
-    new ModuleFederationPlugin({
-      name: 'mfeCart',
-      filename: 'remoteEntry.js',
-      exposes: {
-        './Cart': './src/Cart',
-        './cartStore': './src/store/cartStore',
-      },
-      shared: {
-        react: {
-          singleton: true,
-          requiredVersion: '^18.2.0',
-        },
-        'react-dom': {
-          singleton: true,
-          requiredVersion: '^18.2.0',
-        },
-        zustand: {
-          singleton: true,
-        },
-      },
-    }),
-
-    new HtmlWebpackPlugin({
-      template: './public/index.html',
-    }),
-  ],
+  };
 };

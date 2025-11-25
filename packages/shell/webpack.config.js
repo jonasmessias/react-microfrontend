@@ -2,26 +2,30 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { ModuleFederationPlugin } = require('webpack').container;
 const path = require('path');
 
-module.exports = {
-  entry: './src/index.tsx',
-  mode: 'development',
-  devServer: {
-    port: 3000,
-    hot: true,
-    historyApiFallback: true,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
+module.exports = (env, argv) => {
+  const isDev = argv.mode === 'development';
+  const publicPath = process.env.PUBLIC_PATH || (isDev ? 'http://localhost:3000/' : '/microfrontend/');
+
+  return {
+    entry: './src/index.tsx',
+    mode: 'development',
+    devServer: {
+      port: 3000,
+      hot: true,
+      historyApiFallback: true,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+      },
     },
-  },
-  output: {
-    publicPath: 'auto',
-    clean: true,
-  },
-  resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx'],
-  },
-  module: {
-    rules: [
+    output: {
+      publicPath,
+      clean: true,
+    },
+    resolve: {
+      extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    },
+    module: {
+      rules: [
       {
         test: /\.tsx?$/,
         use: 'ts-loader',
@@ -43,13 +47,17 @@ module.exports = {
         ],
       },
     ],
-  },
-  plugins: [
+    },
+    plugins: [
     new ModuleFederationPlugin({
       name: 'shell',
       remotes: {
-        mfeProducts: 'mfeProducts@http://localhost:3001/remoteEntry.js',
-        mfeCart: 'mfeCart@http://localhost:3002/remoteEntry.js',
+        mfeProducts: process.env.PRODUCTS_URL || (isDev 
+          ? 'mfeProducts@http://localhost:3001/remoteEntry.js'
+          : 'mfeProducts@/microfrontend/products/remoteEntry.js'),
+        mfeCart: process.env.CART_URL || (isDev
+          ? 'mfeCart@http://localhost:3002/remoteEntry.js'
+          : 'mfeCart@/microfrontend/cart/remoteEntry.js'),
       },
       shared: {
         react: {
@@ -68,5 +76,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './public/index.html',
     }),
-  ],
+    ],
+  };
 };
