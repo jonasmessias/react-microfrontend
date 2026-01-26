@@ -4,7 +4,8 @@ const path = require('path');
 
 module.exports = (env, argv) => {
   const isDev = argv.mode === 'development';
-  const publicPath = process.env.PUBLIC_PATH || (isDev ? 'http://localhost:3001/' : '/microfrontend/products/');
+  const publicPath =
+    process.env.PUBLIC_PATH || (isDev ? 'http://localhost:3001/' : 'https://jonasmessias.github.io/microfrontend/products/');
 
   return {
     entry: './src/index.tsx',
@@ -31,26 +32,26 @@ module.exports = (env, argv) => {
 
     module: {
       rules: [
-      {
-        test: /\.tsx?$/,
-        use: 'ts-loader',
-        exclude: /node_modules/,
-      },
-      {
-        test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          {
-            loader: 'postcss-loader',
-            options: {
-              postcssOptions: {
-                config: path.resolve(__dirname, 'postcss.config.js'),
+        {
+          test: /\.tsx?$/,
+          use: 'ts-loader',
+          exclude: /node_modules/,
+        },
+        {
+          test: /\.css$/,
+          use: [
+            'style-loader',
+            'css-loader',
+            {
+              loader: 'postcss-loader',
+              options: {
+                postcssOptions: {
+                  config: path.resolve(__dirname, 'postcss.config.js'),
+                },
               },
             },
-          },
-        ],
-      },
+          ],
+        },
       ],
     },
 

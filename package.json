@@ -21,7 +21,7 @@
     "lint": "turbo run lint",
     "clean": "turbo run clean",
     "format": "prettier --write \"packages/**/*.{ts,tsx,json,css,md}\"",
-    "build:gh-pages": "turbo run build -- --mode production && node scripts/prepare-gh-pages.js",
+    "build:gh-pages": "node scripts/prepare-gh-pages.js",
     "deploy:gh-pages": "npm run build:gh-pages && gh-pages -d dist",
     "version:shell": "npm version patch -w @microshop/shell --no-git-tag-version",
     "version:products": "npm version patch -w @microshop/mfe-products --no-git-tag-version",
