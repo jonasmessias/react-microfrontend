@@ -5,7 +5,7 @@ const path = require('path');
 module.exports = (env, argv) => {
   const isDev = argv.mode === 'development';
   const publicPath =
-    process.env.PUBLIC_PATH || (isDev ? 'http://localhost:3001/' : 'https://jonasmessias.github.io/microfrontend/products/');
+    process.env.PUBLIC_PATH || (isDev ? 'http://localhost:3001/' : 'https://jonasmessias.github.io/react-microfrontend/products/');
 
   return {
     entry: './src/index.tsx',

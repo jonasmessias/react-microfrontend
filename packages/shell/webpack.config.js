@@ -5,7 +5,7 @@ const path = require('path');
 module.exports = (env, argv) => {
   const isDev = argv.mode === 'development';
   const publicPath =
-    process.env.PUBLIC_PATH || (isDev ? 'http://localhost:3000/' : '/microfrontend/');
+    process.env.PUBLIC_PATH || (isDev ? 'http://localhost:3000/' : '/react-microfrontend/');
 
   return {
     entry: './src/index.tsx',
@@ -57,12 +57,12 @@ module.exports = (env, argv) => {
             process.env.PRODUCTS_URL ||
             (isDev
               ? 'mfeProducts@http://localhost:3001/remoteEntry.js'
-              : 'mfeProducts@https://jonasmessias.github.io/microfrontend/products/remoteEntry.js'),
+              : 'mfeProducts@https://jonasmessias.github.io/react-microfrontend/products/remoteEntry.js'),
           mfeCart:
             process.env.CART_URL ||
             (isDev
               ? 'mfeCart@http://localhost:3002/remoteEntry.js'
-              : 'mfeCart@https://jonasmessias.github.io/microfrontend/cart/remoteEntry.js'),
+              : 'mfeCart@https://jonasmessias.github.io/react-microfrontend/cart/remoteEntry.js'),
         },
         shared: {
           react: {

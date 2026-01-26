@@ -8,7 +8,7 @@ const productsDist = path.join(__dirname, '../packages/mfe-products/dist');
 const cartDist = path.join(__dirname, '../packages/mfe-cart/dist');
 
 // Nome do repositório GitHub (AJUSTE SE NECESSÁRIO)
-const REPO_NAME = 'microfrontend';
+const REPO_NAME = 'react-microfrontend';
 const BASE_URL = `https://jonasmessias.github.io/${REPO_NAME}`;
 
 console.log('🚀 Preparando build para GitHub Pages...\n');
