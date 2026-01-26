@@ -6,7 +6,7 @@
 
 ### 🏠 Complete Application (Integrated)
 
-� **[https://jonasmessias.github.io/react-microfrontend/](https://jonasmessias.github.io/react-microfrontend/)**
+- **[https://jonasmessias.github.io/react-microfrontend/](https://jonasmessias.github.io/react-microfrontend/)**
 
 The main application showcasing the complete microfrontend architecture with Shell, Products, and Cart working together seamlessly.
 
