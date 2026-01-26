@@ -27,7 +27,7 @@ process.env.PUBLIC_PATH = `${BASE_URL}/products/`;
 execSync('npm run build -- --mode production', {
   cwd: path.join(__dirname, '../packages/mfe-products'),
   stdio: 'inherit',
-  env: { ...process.env, PUBLIC_PATH: `${BASE_URL}/products/` }
+  env: { ...process.env, PUBLIC_PATH: `${BASE_URL}/products/` },
 });
 
 console.log('\n📦 Building MFE Cart...');
@@ -35,7 +35,7 @@ process.env.PUBLIC_PATH = `${BASE_URL}/cart/`;
 execSync('npm run build -- --mode production', {
   cwd: path.join(__dirname, '../packages/mfe-cart'),
   stdio: 'inherit',
-  env: { ...process.env, PUBLIC_PATH: `${BASE_URL}/cart/` }
+  env: { ...process.env, PUBLIC_PATH: `${BASE_URL}/cart/` },
 });
 
 console.log('\n📦 Building Shell...');
@@ -49,8 +49,8 @@ execSync('npm run build -- --mode production', {
     ...process.env,
     PUBLIC_PATH: `${BASE_URL}/`,
     PRODUCTS_URL: `mfeProducts@${BASE_URL}/products/remoteEntry.js`,
-    CART_URL: `mfeCart@${BASE_URL}/cart/remoteEntry.js`
-  }
+    CART_URL: `mfeCart@${BASE_URL}/cart/remoteEntry.js`,
+  },
 });
 
 // Copiar shell para raiz
