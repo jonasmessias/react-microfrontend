@@ -2,7 +2,7 @@
 
 ![CI](https://github.com/jonasmessias/microfrontend/actions/workflows/ci.yml/badge.svg)
 
-🚀 **[Live Demo](https://jonasmessias.github.io/react-microfrontend/)**
+🚀 **[Live Demo]([https://jonasmessias.github.io/react-microfrontend/](https://jonasmessias.github.io/react-microfrontend/))**
 
 A practical demonstration of **microfrontend architecture** applied to an e-commerce scenario, implemented with **Webpack Module Federation** and **React 18**.
 
