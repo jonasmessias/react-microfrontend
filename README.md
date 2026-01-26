@@ -2,7 +2,6 @@
 
 ![CI](https://github.com/jonasmessias/microfrontend/actions/workflows/ci.yml/badge.svg)
 
-<<<<<<< HEAD
 ## 🌐 Live Demo
 
 ### 🏠 Complete Application (Integrated)
@@ -19,9 +18,6 @@ Each microfrontend can also run independently:
 - **Cart MFE**: [https://jonasmessias.github.io/react-microfrontend/cart/](https://jonasmessias.github.io/react-microfrontend/cart/)
 
 ---
-=======
-🚀 **[Live Demo]([https://jonasmessias.github.io/react-microfrontend/](https://jonasmessias.github.io/react-microfrontend/))**
->>>>>>> 365e54a19ce625c2375969b1d45aa35ddaecbb1f
 
 A practical demonstration of **microfrontend architecture** applied to an e-commerce scenario, implemented with **Webpack Module Federation** and **React 18**.
 
