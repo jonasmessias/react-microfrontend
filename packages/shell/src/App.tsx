@@ -10,13 +10,9 @@ import {
 } from './components';
 import { useCartCount, useSearch } from './hooks';
 
-// @ts-ignore - Module Federation dynamic import
 const Products = lazy(() => import('mfeProducts/Products'));
-
-// @ts-ignore - Module Federation dynamic import
 const Cart = lazy(() => import('mfeCart/Cart'));
 
-// @ts-ignore - Module Federation dynamic import to access cart store
 const getCartStore = async () => {
   try {
     const { useCartStore } = await import('mfeCart/cartStore');

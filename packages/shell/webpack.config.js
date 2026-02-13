@@ -73,9 +73,6 @@ module.exports = (env, argv) => {
             singleton: true,
             requiredVersion: '^18.2.0',
           },
-          zustand: {
-            singleton: true,
-          },
         },
       }),
       new HtmlWebpackPlugin({
