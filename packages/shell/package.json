@@ -4,7 +4,7 @@
   "description": "Shell/Container application - Module Federation Host",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jonasmessias/microfrontend.git",
+    "url": "https://github.com/jonasmessias/react-microfrontend.git",
     "directory": "packages/shell"
   },
   "scripts": {

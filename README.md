@@ -1,6 +1,6 @@
 # MicroShop - Microfrontend Architecture Showcase
 
-![CI](https://github.com/jonasmessias/microfrontend/actions/workflows/ci.yml/badge.svg)
+![CI](https://github.com/jonasmessias/react-microfrontend/actions/workflows/ci.yml/badge.svg)
 
 ## 🌐 Live Demo
 
