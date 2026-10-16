@@ -2,15 +2,15 @@
 
 ![CI](https://github.com/jonasmessias/react-microfrontend/actions/workflows/ci.yml/badge.svg)
 
-## 🌐 Live Demo
+## Live Demo
 
-### 🏠 Complete Application (Integrated)
+### Complete Application (Integrated)
 
 - **[https://jonasmessias.github.io/react-microfrontend/](https://jonasmessias.github.io/react-microfrontend/)**
 
 The main application showcasing the complete microfrontend architecture with Shell, Products, and Cart working together seamlessly.
 
-### 🛍️ Standalone Microfrontends
+### Standalone Microfrontends
 
 Each microfrontend can also run independently:
 
