@@ -1,37 +1,37 @@
-# MicroShop - Microfrontend Architecture Showcase
+# MicroShop — Demonstração de Arquitetura de Microfrontends
 
 ![CI](https://github.com/jonasmessias/react-microfrontend/actions/workflows/ci.yml/badge.svg)
 
-## Live Demo
+## Demonstração ao vivo
 
-### Complete Application (Integrated)
+### Aplicação completa (integrada)
 
 - **[https://jonasmessias.github.io/react-microfrontend/](https://jonasmessias.github.io/react-microfrontend/)**
 
-The main application showcasing the complete microfrontend architecture with Shell, Products, and Cart working together seamlessly.
+A aplicação principal demonstra a arquitetura completa de microfrontends, com Shell, Produtos e Carrinho funcionando em conjunto.
 
-### Standalone Microfrontends
+### Microfrontends independentes
 
-Each microfrontend can also run independently:
+Cada microfrontend também pode ser executado separadamente:
 
-- **Products MFE**: [https://jonasmessias.github.io/react-microfrontend/products/](https://jonasmessias.github.io/react-microfrontend/products/)
-- **Cart MFE**: [https://jonasmessias.github.io/react-microfrontend/cart/](https://jonasmessias.github.io/react-microfrontend/cart/)
+- **Microfrontend de Produtos:** [https://jonasmessias.github.io/react-microfrontend/products/](https://jonasmessias.github.io/react-microfrontend/products/)
+- **Microfrontend de Carrinho:** [https://jonasmessias.github.io/react-microfrontend/cart/](https://jonasmessias.github.io/react-microfrontend/cart/)
 
 ---
 
-A practical demonstration of **microfrontend architecture** applied to an e-commerce scenario, implemented with **Webpack Module Federation** and **React 18**.
+Uma demonstração prática da **arquitetura de microfrontends** aplicada a um cenário de comércio eletrônico, implementada com **Webpack Module Federation** e **React 18**.
 
-## About the Project
+## Sobre o projeto
 
-This is a **technical showcase** demonstrating the implementation of microfrontends in a real-world e-commerce context. The goal is to illustrate how different teams can develop and deploy features independently while maintaining a seamless user experience.
+Este é um **projeto de demonstração técnica** que apresenta a implementação de microfrontends em um contexto realista de comércio eletrônico. O objetivo é mostrar como diferentes equipes podem desenvolver e publicar funcionalidades de forma independente, mantendo uma experiência integrada para o usuário.
 
-**Key concepts demonstrated:**
+**Principais conceitos demonstrados:**
 
-- Module Federation for runtime code sharing
-- Independent development and deployment of each microfrontend
-- Shared state between applications via Zustand
-- Decoupled communication via EventBus (CustomEvents)
+- Module Federation para compartilhamento de código em tempo de execução
+- Desenvolvimento e publicação independentes de cada microfrontend
+- Estado compartilhado entre aplicações com Zustand
+- Comunicação desacoplada por meio de EventBus (CustomEvents)
 
-## Architecture
+## Arquitetura
 
-### Monorepo Structure
+### Estrutura do monorepo
